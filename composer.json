@@ -1,5 +1,5 @@
 {
-    "name": "auth",
+    "name": "test/auth",
     "description": "auth-test task",
     "keywords": ["auth", "api", "test", "task"],
     "homepage": "http://127.0.0.1:8000/",

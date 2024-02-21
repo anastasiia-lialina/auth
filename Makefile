@@ -53,6 +53,12 @@ app_install:
 	docker-compose run --rm php composer install
 
 ##################
+# DB
+##################
+
+create-db:
+	docker-compose exec -T mysqldb mysql -u"$(MYSQL_USER)" -p"$(MYSQL_PASSWORD)" -e "create database $(MYSQL_DATABASE)"
+##################
 # Config
 ##################
 app_config:
@@ -61,5 +67,26 @@ app_config:
 	sed -i "s/'password' => '.*',/'password' => '$(MYSQL_ROOT_PASSWORD)',/g" $(DB_CONFIG_FILE)
 	sed -i "4i\	'secret_key' => '$(APP_SECRET_KEY)',\n" $(PARAMS_CONFIG_FILE)
 
-install:
-	make app_config make
+##################
+# Migrations
+##################
+
+migrate:
+	docker-compose run --rm php yii migrate
+
+migrate-down:
+	docker-compose run --rm php yii migrate/down
+
+migrate-create:
+	docker-compose run --rm php yii migrate/create $(name)
+
+##################
+# init
+##################
+
+init:
+	make up
+	make app_config
+	make lib_update
+	make create-db
+	make migrate
