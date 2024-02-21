@@ -57,11 +57,13 @@ app_install:
 ##################
 
 create-db:
-	docker-compose exec -T mysqldb mysql -u"$(MYSQL_USER)" -p"$(MYSQL_PASSWORD)" -e "create database $(MYSQL_DATABASE)"
+	docker-compose exec -T mysqldb mysql -u"$(MYSQL_USER)" -p"$(MYSQL_PASSWORD)" -e "create database if not exists $(MYSQL_DATABASE)"
 ##################
 # Config
 ##################
 app_config:
+	cp $(DB_CONFIG_FILE).example $(DB_CONFIG_FILE)
+	cp $(PARAMS_CONFIG_FILE).example $(PARAMS_CONFIG_FILE)
 	sed -i "s/'dsn' => '.*',/'dsn' => 'mysql:host=$(MYSQL_HOST);dbname=$(MYSQL_DATABASE)',/g" $(DB_CONFIG_FILE)
 	sed -i "s/'username' => '.*',/'username' => '$(MYSQL_USER)',/g" $(DB_CONFIG_FILE)
 	sed -i "s/'password' => '.*',/'password' => '$(MYSQL_ROOT_PASSWORD)',/g" $(DB_CONFIG_FILE)

@@ -38,3 +38,6 @@ tests/_support/_generated
 /vagrant
 
 /data
+
+/config/db.php
+/config/params.php
