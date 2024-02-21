@@ -65,7 +65,8 @@ app_config:
 	sed -i "s/'dsn' => '.*',/'dsn' => 'mysql:host=$(MYSQL_HOST);dbname=$(MYSQL_DATABASE)',/g" $(DB_CONFIG_FILE)
 	sed -i "s/'username' => '.*',/'username' => '$(MYSQL_USER)',/g" $(DB_CONFIG_FILE)
 	sed -i "s/'password' => '.*',/'password' => '$(MYSQL_ROOT_PASSWORD)',/g" $(DB_CONFIG_FILE)
-	sed -i "4i\	'secret_key' => '$(APP_SECRET_KEY)',\n" $(PARAMS_CONFIG_FILE)
+	sed -i "s/'secret_key' => '.*',/'secret_key' => '$(APP_SECRET_KEY)',/g" $(PARAMS_CONFIG_FILE)
+	#sed -i "4i\	'secret_key' => '$(APP_SECRET_KEY)',\n" $(PARAMS_CONFIG_FILE)
 
 ##################
 # Migrations

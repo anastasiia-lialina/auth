@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'secret_key' => '977fea8deca4c2c2330544cf2e388284',
+	'secret_key' => 'test',
 
     'adminEmail' => 'admin@example.com',
     'senderEmail' => 'noreply@example.com',
