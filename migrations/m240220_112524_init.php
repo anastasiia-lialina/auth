@@ -24,7 +24,7 @@ class m240220_112524_init extends Migration
             'city' => $this->string(255)->notNull()->comment('Город'),
         ], $tableOptions);
 
-        $this->createIndex('primary_kry', '{{%user}}', 'id', true);
+        $this->createIndex('primary_key', '{{%user}}', 'id', true);
     }
 
     public function down()
